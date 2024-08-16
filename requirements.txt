@@ -1,0 +1,11 @@
+streamlit
+pandas
+openpyxl
+numpy
+matplotlib
+PIL
+tkinter
+seaborn
+math
+scipy
+statsmodels
