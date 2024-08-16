@@ -63,7 +63,7 @@ n_linhas = st.number_input("Número de linhas", min_value=1, max_value=arquivo.s
 info_placeholder = st.empty()
 
 # ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
-col1, col2, col3, col4 = st.columns(4)
+col1, col2 = st.columns(2)
 
 def save_file_dialog(file_type):
     root = Tk()
@@ -77,21 +77,8 @@ with col1:
     if st.button("Amostra Simples"):
         info_placeholder.write(arquivo.sample(n_linhas))
 
+
 with col2:
-    if st.button("Extrair para CSV"):
-        file_path = save_file_dialog("csv")
-        if file_path:
-            arquivo.sample(n_linhas).to_csv(file_path, index=False)
-            st.success("Amostra simples extraída com sucesso!")
-
-with col3:
-    if st.button("Extrair para Excel"):
-        file_path = save_file_dialog("xlsx")
-        if file_path:
-            arquivo.sample(n_linhas).to_excel(file_path, index=False)
-            st.success("Amostra simples extraída com sucesso!")
-
-with col4:
     if st.button("Salvar na sessão"):
         st.session_state['amostra_simples'] = arquivo.sample(n_linhas)
         st.success("Amostra simples salva na sessão com sucesso!")
@@ -126,7 +113,8 @@ with col3_1:
 info_placeholder = st.empty()
 
 # ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
-col1, col2, col3, col4 = st.columns(4)
+col1, col2= st.columns(2)
+
 def amostragem_sistematica(df, dividir, tamanho_amostra, seed=None):
     tamanho_populacao = len(df)
     np.random.seed(seed)
@@ -141,21 +129,8 @@ with col1:
     if st.button("Amostra Sistemática", key='amostra_sistematica1'):
         amostra_sistematica = amostragem_sistematica(arquivo, n_linhas, tamanha_amostra, seed)
         info_placeholder.write(amostra_sistematica)
+
 with col2:
-    if st.button("Extrair para CSV", key='amostra_sistematica2'):
-        file_path = save_file_dialog("csv")
-        if file_path:
-            arquivo.sample(n_linhas).to_csv(file_path, index=False)
-            st.success("Amostra sistemática extraída com sucesso!")
-
-with col3:
-    if st.button("Extrair para Excel", key='amostra_sistematica3'):
-        file_path = save_file_dialog("xlsx")
-        if file_path:
-            arquivo.sample(n_linhas).to_excel(file_path, index=False)
-            st.success("Amostra sistemática extraída com sucesso!")
-
-with col4:
     if st.button("Salvar na sessão", key='amostra_sistematica4'):
         st.session_state['amostra_sistematica'] = arquivo.sample(n_linhas)
         st.success("Amostra sistemática salva na sessão com sucesso!")
@@ -185,7 +160,7 @@ num_grupos = st.number_input("Número de grupos", min_value=1, max_value=arquivo
 info_placeholder = st.empty()
 
 # ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
-col1, col2, col3, col4 = st.columns(4)
+col1, col2 = st.columns(2)
 
 def amostragem_por_grupos(df, num_grupos):
     """
@@ -214,21 +189,8 @@ with col1:
         amostra_grupos = amostragem_por_grupos(arquivo, num_grupos)
         info_placeholder.write(amostra_grupos)
 
+
 with col2:
-    if st.button("Extrair para CSV", key='amostra_grupos2'):
-        file_path = save_file_dialog("csv")
-        if file_path:
-            arquivo.sample(n_linhas).to_csv(file_path, index=False)
-            st.success("Amostra por grupos extraída com sucesso!")
-
-with col3:
-    if st.button("Extrair para Excel", key='amostra_grupos3'):
-        file_path = save_file_dialog("xlsx")
-        if file_path:
-            arquivo.sample(n_linhas).to_excel(file_path, index=False)
-            st.success("Amostra por grupos extraída com sucesso!")
-
-with col4:
     if st.button("Salvar na sessão", key='amostra_grupos4'):
         st.session_state['amostra_grupos'] = arquivo.sample(n_linhas)
         st.success("Amostra por grupos salva na sessão com sucesso!")
@@ -261,7 +223,7 @@ def toggle_button_state(key):
 info_placeholder = st.empty()
 
 # ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
-col1, col2, col3, col4 = st.columns(4)
+col1, col2 = st.columns(2)
 
 def amostra_estratificada(df, coluna_estratificacao, n):
     # Proporção de amostra em relação ao tamanho total do dataset
@@ -285,23 +247,8 @@ with col1:
         else:
             info_placeholder.empty()
 
+
 with col2:
-    if st.button("Extrair para CSV", key='amostra_estratificada2'):
-        file_path = save_file_dialog("csv")
-        if file_path:
-            amostra = amostra_estratificada(arquivo, coluna_estratificacao, n_linhas)
-            amostra.to_csv(file_path, index=False)
-            st.success("Amostra estratificada extraída com sucesso!")
-
-with col3:
-    if st.button("Extrair para Excel", key='amostra_estratificada3'):
-        file_path = save_file_dialog("xlsx")
-        if file_path:
-            amostra = amostra_estratificada(arquivo, coluna_estratificacao, n_linhas)
-            amostra.to_excel(file_path, index=False)
-            st.success("Amostra estratificada extraída com sucesso!")
-
-with col4:
     if st.button("Salvar na sessão", key='amostra_estratificada4'):
         st.session_state['amostra_estratificada'] = amostra_estratificada(arquivo, coluna_estratificacao, n_linhas)
         st.success("Amostra estratificada salva na sessão com sucesso!")

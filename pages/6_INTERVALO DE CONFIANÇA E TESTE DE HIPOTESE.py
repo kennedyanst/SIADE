@@ -41,18 +41,20 @@ st.sidebar.image(logo_fap, use_column_width=True)
 # Supondo que as amostras já foram salvas na sessão
 base_completa = st.session_state.get('arquivo', pd.DataFrame())
 amostra_simples = st.session_state.get('amostra_simples', pd.DataFrame())
-# amostra_sistematica = st.session_state.get('amostra_sistematica', pd.DataFrame())
-# amostra_grupos = st.session_state.get('amostra_grupos', pd.DataFrame())
-# amostra_estratificada = st.session_state.get('amostra_estratificada', pd.DataFrame())
-# Página 4 - Seleção de Amostras e Distribuição de Frequência
+amostra_sistematica = st.session_state.get('amostra_sistematica', pd.DataFrame())
+amostra_grupos = st.session_state.get('amostra_grupos', pd.DataFrame())
+amostra_estratificada = st.session_state.get('amostra_estratificada', pd.DataFrame())
+
+
+# Página 6 - Intervalo de Confiança e Teste de Hipótese
 
 # Lista de amostras para seleção
 amostras = {
     "Base Completa": base_completa,
     "Amostra Simples": amostra_simples,
-    # "Amostra Sistemática": amostra_sistematica,
-    # "Amostra por Grupos": amostra_grupos,
-    # "Amostra Estratificada": amostra_estratificada
+    "Amostra Sistemática": amostra_sistematica,
+    "Amostra por Grupos": amostra_grupos,
+    "Amostra Estratificada": amostra_estratificada
 }
 
 st.title("INTERVALO DE CONFIANÇA E TESTE DE HIPÓTESE")
