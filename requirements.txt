@@ -3,7 +3,6 @@ pandas
 openpyxl
 numpy
 matplotlib
-PIL
 tkinter
 seaborn
 math
