@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import os
 from tkinter import Tk, filedialog
 import numpy as np
 from PIL import Image
