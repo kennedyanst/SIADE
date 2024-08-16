@@ -35,8 +35,32 @@ st.sidebar.image(logo_fap, use_column_width=True)
 #TÍTULO
 st.title("S.I.A.D.E - Sistema de Análise de Dados e Estatística")
 
-#Descrição
-st.markdown("Este é um aplicativo para análise de dados e validação estatística de hipóteses. Contendo 7 páginas: **Base**, **Amostragem**, **Distribuição de Frequência**, **Posição e Dispersão**, **Distribuição Estatística**, **Intervalo de Confiança e Teste de Hipótese**, e **Visualização**. Cada uma dessas páginas contém diferentes tipos de ferramentas matematicas para análise de dados e auxiliar o usúario na .")
+# Descrição
+st.header("Este é um aplicativo para análise de dados e validação estatística de hipóteses. Contendo 7 páginas: **Base**, **Amostragem**, **Distribuição de Frequência**, **Posição e Dispersão**, **Distribuição Estatística**, **Intervalo de Confiança e Teste de Hipótese**, e **Visualização**. Cada uma dessas páginas contém diferentes tipos de ferramentas matemáticas para análise de dados.")
+
+st.header("O modelo de tabela deve ser o seguinte:")
+
+# Exemplo de tabela no modelo especificado
+data = {
+    'Tipo de Célula': ['A', 'B', 'C', 'D'],
+    'Amostra 1': [10, 20, 30, 40],
+    'Amostra 2': [5.5, 15.5, 25.5, 35.5],
+    'Amostra 3': [100, 200, 300, 400],
+    'Amostra 4': [50, 150, 250, 350],
+    'Amostra 5': [25, 75, 125, 175],
+    'Amostra 6': [12.5, 37.5, 62.5, 87.5],
+    'Amostra 7': [15, 45, 75, 105],
+    'Amostra 8': [7.5, 22.5, 37.5, 52.5],
+    'Amostra 9': [3.75, 11.25, 18.75, 26.25],
+    'Amostra 10': [1.875, 5.625, 9.375, 13.125]
+}
+
+df = pd.DataFrame(data)
+
+# Exibindo a tabela de exemplo
+st.markdown("### Exemplo de Tabela:")
+st.write(df)
+         
 
 # Botão para selecionar um arquivo excel
 st.markdown('<h2>Selecione Um Arquivo Excel (.xlsx) ou CSV (.csv) para Análise</h2>', unsafe_allow_html=True)
