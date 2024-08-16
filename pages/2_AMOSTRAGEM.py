@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from tkinter import Tk, filedialog
 import numpy as np
 from PIL import Image
 
@@ -65,13 +64,13 @@ info_placeholder = st.empty()
 # ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
 col1, col2 = st.columns(2)
 
-def save_file_dialog(file_type):
-    root = Tk()
-    root.withdraw()  # Oculta a janela principal do Tkinter
-    root.attributes('-topmost', True)  # Garante que a janela de diálogo apareça na frente
-    file_path = filedialog.asksaveasfilename(defaultextension=file_type, filetypes=[(file_type.upper(), f"*.{file_type}")])
-    root.destroy()
-    return file_path
+# #def save_file_dialog(file_type):
+#     root = Tk()
+#     root.withdraw()  # Oculta a janela principal do Tkinter
+#     root.attributes('-topmost', True)  # Garante que a janela de diálogo apareça na frente
+#     file_path = filedialog.asksaveasfilename(defaultextension=file_type, filetypes=[(file_type.upper(), f"*.{file_type}")])
+#     root.destroy()
+#     return file_path
 
 with col1:
     if st.button("Amostra Simples"):
