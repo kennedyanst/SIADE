@@ -33,6 +33,11 @@ st.sidebar.markdown(
 logo_fap = Image.open("fap.jpg")
 st.sidebar.image(logo_fap, use_column_width=True)
 
+st.markdown("Curso de Biomedicina - Centro Universitário do Distrito Federal (UDF)")
+st.markdown("Projeto: Análise de Bases de Dados Genômicos e Desenvolvimento de Ferramentas  Computacionais Para as Ciências Biomédicas.")
+st.markdown("Orientador: Prof. Dr. Adriano Rios da Silva Santana Leite")
+st.markdown("Bolsista: Kennedy Anderson Nascimento Santos")
+
 #TÍTULO
 st.title("S.I.A.D.E - Sistema de Análise de Dados e Estatística")
 
