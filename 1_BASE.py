@@ -6,6 +6,7 @@ from PIL import Image
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 
 
 # Configurando a página
@@ -65,6 +66,10 @@ st.write(df)
 # Botão para selecionar um arquivo excel
 st.markdown('<h2>Selecione Um Arquivo Excel (.xlsx) ou CSV (.csv) para Análise</h2>', unsafe_allow_html=True)
 
+st.markdown('Arquivo CSV precisam ter o separador "," e o encoding "UTF-8".')
+
+
+
 # Função para selecionar o arquivo
 def selecionar_arquivo():
     arquivo = st.file_uploader("Escolha um arquivo Excel ou CSV.", type=["xlsx", "csv"], key="file_uploader")
@@ -82,7 +87,6 @@ def selecionar_arquivo():
         st.write(df)
     else:
         st.write("Nenhum arquivo selecionado.")
-
 
 # Função para carregar novamente um arquivo
 def carregar_novo_arquivo():
