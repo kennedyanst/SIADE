@@ -71,7 +71,7 @@ st.write(df)
          
 
 # Botão para selecionar um arquivo excel
-st.markdown('<h2>Selecione Um Arquivo Excel (.xlsx) ou CSV (.csv) para Análise</h2>', unsafe_allow_html=True)
+st.markdown('<h2>Carregue uma base em formato excel (.xlsx) ou csv (.csv).</h2>', unsafe_allow_html=True)
 
 st.markdown('Arquivo CSV precisam ter o separador "," e o encoding "UTF-8".')
 
@@ -93,7 +93,7 @@ def selecionar_arquivo():
         st.session_state['arquivo'] = df
         st.write(df)
     else:
-        st.write("Nenhum arquivo selecionado.")
+        st.write("Nenhum arquivo carregado.")
 
 # Função para carregar novamente um arquivo
 def carregar_novo_arquivo():
