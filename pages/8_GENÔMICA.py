@@ -188,6 +188,6 @@ if uploaded_file is not None:
         
         # Exibindo os valores
         st.write(f"A maior correlação entre aminoácidos diferentes tem o valor de {max_correlation_value:.2f} e a menor correlação tem o valor de {min_correlation_value:.2f}.")
-        st.write(f"A maior correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmax()} e a menor correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmin()}.")
+        st.write(f" maior correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmax()} e a menor correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmin()}.")
     else:
         st.warning("Por favor, digite o nome do gene.")
