@@ -30,7 +30,7 @@ st.header("Selecione o arquivo FASTA que deseja analisar e obtenha informações
 gene_name = st.text_input("Digite o nome do gene:")
 
 # Upload do arquivo FASTA
-uploaded_file = st.file_uploader("Carregue o arquivo FASTA", type=["fasta"])
+uploaded_file = st.file_uploader("Carregue o arquivo FASTA", type=["fasta", "fna"])
 
 # Verificação se o usuário carregou um arquivo e digitou o nome do gene
 if uploaded_file is not None and gene_name:
