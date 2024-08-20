@@ -47,7 +47,7 @@ if uploaded_file is not None:
     sequence = parse_fasta(uploaded_file)
     
     # Exibindo a sequência de nucleotídeos (código genético)
-    st.subheader(f"Código Genético: {gene_name}")
+    st.subheader("Código Genético")
     st.text_area("Sequência de Nucleotídeos:", value=sequence, height=150)
     
     # Verificação se o usuário digitou o nome do gene
@@ -92,6 +92,7 @@ if uploaded_file is not None:
         # Função para traduzir a sequência de nucleotídeos em aminoácidos
         def translate_sequence(sequence, codon_to_amino_acid):
             amino_acid_sequence = []
+            codons_used = []
             rna_sequence = sequence.replace("T", "U")  # Transcreve DNA para RNA
             
             for i in range(0, len(rna_sequence), 3):
@@ -99,20 +100,26 @@ if uploaded_file is not None:
                 if len(codon) == 3:
                     amino_acid = codon_to_amino_acid.get(codon, "Unknown")
                     amino_acid_sequence.append(amino_acid)
+                    codons_used.append(codon)
             
-            return amino_acid_sequence
+            return amino_acid_sequence, codons_used
         
         # Traduzindo a sequência de nucleotídeos em aminoácidos
-        amino_acid_sequence = translate_sequence(sequence, codon_to_amino_acid)
+        amino_acid_sequence, codons_used = translate_sequence(sequence, codon_to_amino_acid)
         
         # Contando a quantidade de cada aminoácido
         amino_acid_counts = Counter(amino_acid_sequence)
         
-        # Criando um DataFrame para exibir a tabela
-        df_amino_acids = pd.DataFrame(amino_acid_counts.items(), columns=['Aminoácido', 'Quantidade'])
+        # Criando uma lista de tuplas para armazenar os aminoácidos, códons e suas quantidades
+        data = []
+        for amino_acid, codon in zip(amino_acid_sequence, codons_used):
+            data.append((amino_acid, codon, amino_acid_counts[amino_acid]))
         
-        # Exibindo a tabela de aminoácidos e suas quantidades
-        st.subheader(f"Tabela de Aminoácidos para: {gene_name}")
+        # Criando um DataFrame para exibir a tabela
+        df_amino_acids = pd.DataFrame(data, columns=['Aminoácido', 'Códon', 'Quantidade']).drop_duplicates(subset=['Aminoácido']).sort_values(by='Quantidade', ascending=False)
+        
+        # Exibindo a tabela de aminoácidos, códons e suas quantidades
+        st.subheader("Tabela de Aminoácidos")
         st.table(df_amino_acids)
     else:
         st.warning("Por favor, digite o nome do gene.")
