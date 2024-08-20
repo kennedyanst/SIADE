@@ -42,7 +42,9 @@ st.markdown("Bolsista: Kennedy Anderson Nascimento Santos")
 st.title("S.I.A.D.E - Sistema de Análise de Dados e Estatística")
 
 # Descrição
-st.header("Este é um aplicativo para análise de dados e validação estatística de hipóteses. Contendo 7 páginas: **Base**, **Amostragem**, **Distribuição de Frequência**, **Posição e Dispersão**, **Distribuição Estatística**, **Intervalo de Confiança e Teste de Hipótese**, e **Visualização**. Cada uma dessas páginas contém diferentes tipos de ferramentas matemáticas para análise de dados.")
+st.header("Baseado na atual demanda acadêmica para validação de dados estatístico, o S.I.A.D.E foi desenvolvido para facilitar a análise de dados de forma rápida e eficiente. Onde o usuário poderá carregar um arquivo de dados e visualizar informações estatísticas sobre o mesmo de forma fácil e rápida, visando comprovar suas hipoteses ou apenas visualizar seus dados de estudo.")
+
+st.header("Esse projeto de iniciação cientifica é um esforço colaborativo entre o Centro Universitário do Distrito Federal (UDF) e a Fundação de Apoio à Pesquisa do Distrito Federal (FAPDF) para auxiliar os estudantes e pesquisadores na análise de dados biomédicos e de outros campos onde se mostrar necessário a aplicação de tecnicas estatísticas.")
 
 st.header("O modelo de tabela deve ser o seguinte:")
 
