@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from collections import Counter
+import networkx as nx
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
 
 # Configurando a página
 st.set_page_config(
@@ -121,5 +125,69 @@ if uploaded_file is not None:
         # Exibindo a tabela de aminoácidos, códons e suas quantidades
         st.subheader(f"Tabela de Aminoácidos para: {gene_name} ")
         st.table(df_amino_acids)
+        
+        # Gráfico de correlação
+        st.subheader(f"Gráfo de Correlação entre Aminoácidos da Proteína: {gene_name}")
+        
+        # Criando um grafo
+        G = nx.Graph()
+        
+        # Adicionando os nós e as conexões (arestas) ao grafo
+        for i in range(len(amino_acid_sequence) - 1):
+            G.add_edge(amino_acid_sequence[i], amino_acid_sequence[i + 1])
+        
+        # Desenhando o grafo
+        pos = nx.spring_layout(G)  # Layout do grafo
+        plt.figure(figsize=(10, 8))
+        nx.draw(G, pos, with_labels=True, node_size=3000, node_color="skyblue", font_size=10, font_weight="bold", edge_color="gray")
+        
+        # Exibindo o grafo no Streamlit
+        st.pyplot(plt)
+
+        def compute_co_occurrence_matrix(amino_acid_sequence):
+            amino_acids = list(set(amino_acid_sequence))
+            matrix = pd.DataFrame(0, index=amino_acids, columns=amino_acids)
+            
+            for i in range(len(amino_acid_sequence) - 1):
+                amino_acid_1 = amino_acid_sequence[i]
+                amino_acid_2 = amino_acid_sequence[i + 1]
+                matrix.at[amino_acid_1, amino_acid_2] += 1
+                matrix.at[amino_acid_2, amino_acid_1] += 1
+    
+            return matrix
+        
+
+        # Calculando a matriz de co-ocorrência
+        co_occurrence_matrix = compute_co_occurrence_matrix(amino_acid_sequence)
+        
+        # Calculando a correlação
+        correlation_matrix = co_occurrence_matrix.corr()
+        
+        # Exibindo a matriz de correlação
+        st.subheader(f"Matriz de Correlação dos Aminoácidos da Proteína: {gene_name}")
+        fig, ax = plt.subplots(figsize=(10, 8))
+        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', ax=ax)
+        st.pyplot(fig)
+
+        # Obtendo a matriz de correlação sem os valores 1 (diagonais)
+        correlation_values = correlation_matrix.values
+
+        # Substituindo os valores 1 por NaN para ignorá-los na busca pela maior correlação
+        np.fill_diagonal(correlation_values, np.nan)
+
+        # Encontrando o maior valor de correlação que não seja 1
+        max_correlation_value = np.nanmax(correlation_values)
+
+        # Encontrando a menor correlação (excluindo NaN)
+        min_correlation_value = np.nanmin(correlation_values)
+
+        
+
+        st.write("A matriz de correlação é uma matriz simétrica que mostra a correlação entre os aminoácidos da proteína. "
+                 "Valores próximos de 1 indicam uma forte correlação positiva, enquanto valores próximos de -1 indicam uma forte correlação negativa. ")
+        
+        # Exibindo os valores
+        st.write(f"A maior correlação entre aminoácidos diferentes tem o valor de {max_correlation_value:.2f} e a menor correlação tem o valor de {min_correlation_value:.2f}.")
+        st.write(f"A maior correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmax()} e a menor correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmin()}.")
     else:
         st.warning("Por favor, digite o nome do gene.")
