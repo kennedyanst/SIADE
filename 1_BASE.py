@@ -37,6 +37,7 @@ st.markdown("Curso de Biomedicina - Centro Universitário do Distrito Federal (U
 st.markdown("Projeto: Análise de Bases de Dados Genômicos e Desenvolvimento de Ferramentas  Computacionais Para as Ciências Biomédicas.")
 st.markdown("Orientador: Prof. Dr. Adriano Rios da Silva Santana Leite")
 st.markdown("Bolsista: Kennedy Anderson Nascimento Santos")
+st.markdown("Data do Projeto: 01/10/2023 - 01/10/2024")
 
 #TÍTULO
 st.title("S.I.A.D.E - Sistema de Análise de Dados e Estatística")
@@ -44,7 +45,9 @@ st.title("S.I.A.D.E - Sistema de Análise de Dados e Estatística")
 # Descrição
 st.header("Baseado na atual demanda acadêmica para validação de dados estatístico, o S.I.A.D.E foi desenvolvido para facilitar a análise de dados de forma rápida e eficiente. Onde o usuário poderá carregar um arquivo de dados e visualizar informações estatísticas sobre o mesmo de forma fácil e rápida, visando comprovar suas hipoteses ou apenas visualizar seus dados de estudo.")
 
-st.header("Esse projeto de iniciação cientifica é um esforço colaborativo entre o Centro Universitário do Distrito Federal (UDF) e a Fundação de Apoio à Pesquisa do Distrito Federal (FAPDF) para auxiliar os estudantes e pesquisadores na análise de dados biomédicos e de outros campos onde se mostrar necessário a aplicação de tecnicas estatísticas.")
+st.header("Este projeto de iniciação cientifica é um esforço colaborativo entre o Centro Universitário do Distrito Federal (UDF) e a Fundação de Apoio à Pesquisa do Distrito Federal (FAPDF) para auxiliar os estudantes e pesquisadores na análise de dados biomédicos e de outros campos onde se mostrar necessário a aplicação de tecnicas estatísticas.")
+
+st.header("Em primeiro momento, o uuário poderá ter acesso a diferentes tecnicas de amostragem, visualização de dados e estatística descritiva. Posteriormente, o sistema será atualizado com novas funcionalidades, como análise de correlação, regressão, entre outras. Além disso, o sistema também contará com uma interface gráfica para análise genômica mais aprofundado de arquivos FASTA. Atualmente o sistema conta com uma análise de proteina mais superficial, onde o usuário poderá inserir uma sequência de aminoácidos e obter informações sobre a mesma.")
 
 st.header("O modelo de tabela deve ser o seguinte:")
 
