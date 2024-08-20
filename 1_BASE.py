@@ -39,7 +39,7 @@ st.markdown("Orientador: Prof. Dr. Adriano Rios da Silva Santana Leite")
 st.markdown("Bolsista: Kennedy Anderson Nascimento Santos")
 
 #TÍTULO
-st.title("S.I.A - Sistema de Análise de Dados e Estatística")
+st.title("S.I.A.D.E - Sistema de Análise de Dados e Estatística")
 
 # Descrição
 st.header("Este é um aplicativo para análise de dados e validação estatística de hipóteses. Contendo 7 páginas: **Base**, **Amostragem**, **Distribuição de Frequência**, **Posição e Dispersão**, **Distribuição Estatística**, **Intervalo de Confiança e Teste de Hipótese**, e **Visualização**. Cada uma dessas páginas contém diferentes tipos de ferramentas matemáticas para análise de dados.")
