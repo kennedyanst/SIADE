@@ -7,4 +7,3 @@ seaborn
 scipy
 statsmodels
 networkx
-collections
