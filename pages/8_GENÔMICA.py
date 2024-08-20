@@ -47,7 +47,7 @@ if uploaded_file is not None:
     sequence = parse_fasta(uploaded_file)
     
     # Exibindo a sequência de nucleotídeos (código genético)
-    st.subheader("Código Genético")
+    st.subheader(f"Código Genético para: {gene_name}")
     st.text_area("Sequência de Nucleotídeos:", value=sequence, height=150)
     
     # Verificação se o usuário digitou o nome do gene
@@ -119,7 +119,7 @@ if uploaded_file is not None:
         df_amino_acids = pd.DataFrame(data, columns=['Aminoácido', 'Códon', 'Quantidade']).drop_duplicates(subset=['Aminoácido']).sort_values(by='Quantidade', ascending=False)
         
         # Exibindo a tabela de aminoácidos, códons e suas quantidades
-        st.subheader("Tabela de Aminoácidos")
+        st.subheader(f"Tabela de Aminoácidos para: {gene_name} ")
         st.table(df_amino_acids)
     else:
         st.warning("Por favor, digite o nome do gene.")
