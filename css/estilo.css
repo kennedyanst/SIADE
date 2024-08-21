@@ -29,20 +29,25 @@ h2{
 
 /*BARRA LATERAL*/
 .st-emotion-cache-1itdyc2{
-        background-color: rgb(0, 157, 157);
+        background-color:rgb(2, 183, 183);
         
 }
 
 /*TEXTO DE NAVEGAÇÃO*/
 .st-emotion-cache-1q2d4ya{
-    color: BLACK;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
 }
 
+.st-emotion-cache-1dj0hjr{
+    color: white;
+    font-size: 12px;
+}
 
-/*PAGINA SELECIONADA*/
+/*PAGINAS*/
 .st-emotion-cache-i4rl61:hover{
     background-color: cyan;
-    color: black;
+    
 }
 
 /*HEARDER */
@@ -53,11 +58,13 @@ h2{
 
 /*NAVEGAÇÃO*/
 .eczjsme14 {
-    background-color: rgb(17, 129, 123);
+    background-color: rgb(13, 223, 213);
+    border: 2px solid cyan;
 }
 
 /*NAVEGAÇÃO HOVER*/
 .eczjsme14:hover {
     background-color: cyan;
+    border: 2px solid white;
 }
 
