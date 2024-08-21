@@ -26,7 +26,7 @@ logo_fap = Image.open("fap.jpg")
 st.sidebar.image(logo_fap, use_column_width=True)
 
 # TÍTULO
-st.title("Análise de Dados Genômicos de Proteínas para arquivos FASTA")
+st.title("nálise de Dados Genômicos de Proteínas para arquivos FASTA")
 
 # Descrição
 st.header("Selecione o arquivo FASTA que deseja analisar e obtenha informações sobre a proteína.")
