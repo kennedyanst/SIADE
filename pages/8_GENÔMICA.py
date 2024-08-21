@@ -11,7 +11,8 @@ import numpy as np
 st.set_page_config(
     page_title="Genômica", 
     layout="wide",
-    page_icon="./favicon_io/favicon.ico"
+    page_icon="./favicon_io/favicon.ico",
+    initial_sidebar_state= "collapsed"
 )
 
 # Adicionando CSS para ajustar o tamanho dos botões
@@ -189,5 +190,22 @@ if uploaded_file is not None:
         # Exibindo os valores
         st.write(f"A maior correlação entre aminoácidos diferentes tem o valor de {max_correlation_value:.2f} e a menor correlação tem o valor de {min_correlation_value:.2f}.")
         st.write(f" maior correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmax()} e a menor correlação ocorre entre os aminoácidos {correlation_matrix.stack().idxmin()}.")
+
+                # Seção para selecionar o aminoácido e exibir as correlações
+        st.subheader(f"Correlação dos Aminoácidos para: {gene_name}")
+
+        # Selecionando um aminoácido da lista
+        amino_acid_selected = st.selectbox("Selecione um Aminoácido para ver suas correlações:", list(correlation_matrix.columns))
+
+        # Criando uma tabela com as correlações do aminoácido selecionado
+        correlation_data = correlation_matrix[amino_acid_selected].drop(amino_acid_selected).reset_index()
+        correlation_data.columns = ['Aminoácido', 'Correlação']
+
+        # Ordenando a tabela pela correlação de forma decrescente
+        correlation_data = correlation_data.sort_values(by='Correlação', ascending=False)
+
+        # Exibindo a tabela
+        st.subheader(f"Tabela de Correlação para o Aminoácido: {amino_acid_selected}")
+        st.table(correlation_data)
     else:
         st.warning("Por favor, digite o nome do gene.")
