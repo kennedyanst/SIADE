@@ -29,7 +29,7 @@ st.sidebar.image(logo_fap, use_column_width=True)
 st.title("Análise de Dados Genômicos de Proteínas para arquivos FASTA")
 
 # Descrição
-st.header("Selecione o arquivo FASTA que deseja analisar e obtenha informações sobre a proteína.")
+st.header("Selecione o arquivo FASTA que deseja analisar e obtenha informações sobre a proteína e seus aminoácidos.")
 
 # Entrada para o nome do gene
 gene_name = st.text_input("Digite o nome do gene:")
