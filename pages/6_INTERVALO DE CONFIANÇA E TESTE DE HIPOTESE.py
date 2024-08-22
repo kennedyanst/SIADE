@@ -173,7 +173,7 @@ amostra_2 = amostra_selecionada[amostra_selecionada["Tipo de Célula"] == tipo_2
 stat_t, p_value_t = teste_t_student(amostra_1, amostra_2, alpha)
 z_stat, p_value_z = teste_hipotese_z(amostra_1, amostra_2, alpha)
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3 = st.columns(3)
 
 # Imprimindo o intervalo de confiança com Scipy em um card
 st.markdown("<div style='display: flex; justify-content: center; flex-wrap: wrap;'>", unsafe_allow_html=True)
@@ -191,21 +191,24 @@ with col2:
     st.markdown(create_card("Intervalo de Confiança (Scipy)", intervalo_conf, f"Intervalo de confiança para alpha={alpha}"), unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Imprimindo o resultado do Teste T de Student em um card
-stat_t_str = f"Stat: {stat_t:.2f}"
-p_value_t_str = f"P-Value: {p_value_t:.4f}"
+
 
 with col3:
-    st.markdown(create_card("Teste T de Student", stat_t_str, p_value_t_str), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    if amostra_selecionada.shape[0] < 30:
+        # Imprimindo o resultado do Teste T de Student em um card
+        stat_t_str = f"Stat: {stat_t:.2f}"
+        p_value_t_str = f"P-Value: {p_value_t:.4f}"
 
-# Imprimindo o resultado do Teste Z em um card
-z_stat_str = f"Z-Stat: {z_stat:.2f}"
-p_value_z_str = f"P-Value: {p_value_z:.4f}"
+        st.markdown(create_card("Teste T de Student", stat_t_str, p_value_t_str), unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-with col4:
-    st.markdown(create_card("Teste de Hipótese Z", z_stat_str, p_value_z_str), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        z_stat_str = f"Z-Stat: {z_stat:.2f}"
+        p_value_z_str = f"P-Value: {p_value_z:.4f}"
+
+        st.markdown(create_card("Teste de Hipótese Z", z_stat_str, p_value_z_str), unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
 
 # Mostra os resultados dos testes na tela
 st.subheader("Visualização dos Dados")
