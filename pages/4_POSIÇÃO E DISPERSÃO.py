@@ -103,12 +103,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.title("Medidas de Posição e Dispersão de Todas as Células")
 
-# Imprimindo as medidas de posição dos tipos de célula em uma tabela
-st.title("Medidas de Posição e Dispersão de Todas as células")
-
-# Sidebar para selecionar a coluna de amostra
-amostra_coluna = st.sidebar.selectbox("Selecione a Amostra", amostra_selecionada.columns[1:], index=0)
+# Sidebar para selecionar a coluna numérica
+colunas_numericas = amostra_selecionada.select_dtypes(include=['number']).columns
+amostra_coluna = st.sidebar.selectbox("Selecione a Coluna Numérica", colunas_numericas, index=0)
 
 # Função para identificar colunas categóricas ou de string
 def colunas_categoricas(df):
@@ -117,29 +116,13 @@ def colunas_categoricas(df):
 # Obtendo as colunas categóricas da amostra selecionada
 colunas_cat = colunas_categoricas(amostra_selecionada)
 
-# Sidebar para selecionar as colunas de filtro
-filtros = {}
+# Verificando se há colunas categóricas disponíveis para agrupamento
 if len(colunas_cat) > 0:
-    for coluna in colunas_cat:
-        valores_unicos = amostra_selecionada[coluna].unique()
-        valor_selecionado = st.sidebar.selectbox(f"Selecione um valor para {coluna}", valores_unicos)
-        filtros[coluna] = valor_selecionado
+    # Usando a primeira coluna categórica para agrupar
+    coluna_agrupamento = colunas_cat[0]
 
-# Filtrando os dados com base nos valores selecionados
-dados_filtrados = amostra_selecionada.copy()
-for coluna, valor in filtros.items():
-    dados_filtrados = dados_filtrados[dados_filtrados[coluna] == valor]
-
-# Verificar se o filtro resultou em uma amostra não vazia
-if dados_filtrados.empty:
-    st.write("Nenhum dado corresponde aos filtros selecionados.")
-else:
-    # Selecionar a coluna numérica para exibir as medidas estatísticas
-    colunas_numericas = dados_filtrados.select_dtypes(include=['number']).columns
-    amostra_coluna = st.sidebar.selectbox("Selecione a Coluna Numérica", colunas_numericas, index=0)
-
-    # Agrupando os dados filtrados pelo tipo de célula
-    grouped = dados_filtrados.groupby(colunas_cat[0])[amostra_coluna]  # Usando a primeira coluna categórica como agrupamento
+    # Agrupando os dados filtrados pelo tipo de célula (ou outra categoria)
+    grouped = amostra_selecionada.groupby(coluna_agrupamento)[amostra_coluna]
 
     # Calculando as medidas estatísticas
     tabela = pd.DataFrame({
@@ -158,23 +141,46 @@ else:
 
     # Exibindo as medidas estatísticas
     st.write(tabela)
+else:
+    st.write("Nenhuma coluna categórica disponível para agrupamento.")
 
-    # Medidas de posição e dispersão da coluna numérica para o valor de célula selecionado
+
+# Sidebar para selecionar as colunas de filtro
+filtros = {}
+if len(colunas_cat) > 0:
+    for coluna in colunas_cat:
+        valores_unicos = amostra_selecionada[coluna].unique()
+        valor_selecionado = st.sidebar.selectbox(f"Selecione um valor para {coluna}", valores_unicos)
+        filtros[coluna] = valor_selecionado
+
+ # Medidas de posição e dispersão da coluna numérica para o valor de célula selecionado
+
     st.title(f"Medidas de Posição e Dispersão da {amostra_selecionada_key}, {amostra_coluna} do tipo de célula: {filtros[colunas_cat[0]]}")
 
-    coluna = pd.DataFrame({
-        "Média": [media(dados_filtrados[amostra_coluna])],
-        "Mediana": [mediana(dados_filtrados[amostra_coluna])],
-        "Moda": [moda(dados_filtrados[amostra_coluna])],
-        "1º Quartil": [quartis(dados_filtrados[amostra_coluna]).loc[0.25]],
-        "3º Quartil": [quartis(dados_filtrados[amostra_coluna]).loc[0.75]],
-        "Percentil 10%": [percentis(dados_filtrados[amostra_coluna]).loc[0.1]],
-        "Percentil 90%": [percentis(dados_filtrados[amostra_coluna]).loc[0.9]],
-        "Amplitude": [amplitude(dados_filtrados[amostra_coluna])],
-        "Desvio Padrão": [desvio_padrao(dados_filtrados[amostra_coluna])],
-        "Variância": [variancia(dados_filtrados[amostra_coluna])],
-        "Coeficiente de Variação": [coeficiente_de_variacao(dados_filtrados[amostra_coluna])]
-    })
+# Filtrando os dados com base nos valores selecionados
+dados_filtrados = amostra_selecionada.copy()
+for coluna, valor in filtros.items():
+    dados_filtrados = dados_filtrados[dados_filtrados[coluna] == valor]
 
-    # Exibindo as medidas estatísticas
-    st.write(coluna)
+
+# Filtrando os dados com base nos valores selecionados
+dados_filtrados = amostra_selecionada.copy()
+for coluna, valor in filtros.items():
+    dados_filtrados = dados_filtrados[dados_filtrados[coluna] == valor]
+
+coluna = pd.DataFrame({
+    "Média": [media(dados_filtrados[amostra_coluna])],
+    "Mediana": [mediana(dados_filtrados[amostra_coluna])],
+    "Moda": [moda(dados_filtrados[amostra_coluna])],
+    "1º Quartil": [quartis(dados_filtrados[amostra_coluna]).loc[0.25]],
+    "3º Quartil": [quartis(dados_filtrados[amostra_coluna]).loc[0.75]],
+    "Percentil 10%": [percentis(dados_filtrados[amostra_coluna]).loc[0.1]],
+    "Percentil 90%": [percentis(dados_filtrados[amostra_coluna]).loc[0.9]],
+    "Amplitude": [amplitude(dados_filtrados[amostra_coluna])],
+    "Desvio Padrão": [desvio_padrao(dados_filtrados[amostra_coluna])],
+    "Variância": [variancia(dados_filtrados[amostra_coluna])],
+    "Coeficiente de Variação": [coeficiente_de_variacao(dados_filtrados[amostra_coluna])]
+})
+
+# Exibindo as medidas estatísticas
+st.write(coluna)

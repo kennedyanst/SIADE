@@ -155,13 +155,11 @@ st.write("Número de linhas no arquivo:", arquivo.shape[0])
 n_linhas = st.number_input("Número de linhas", min_value=1, max_value=arquivo.shape[0], value=10, key='n_linhas3')
 num_grupos = st.number_input("Número de grupos", min_value=1, max_value=arquivo.shape[0], value=5, key='num_grupos')
 
-# Espaço reservado para exibir as informações a baixo dos botões
 info_placeholder = st.empty()
 
-# ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
 col1, col2 = st.columns(2)
 
-def amostragem_por_grupos(df, num_grupos):
+def amostragem_por_grupos(df, num_grupos, n_linhas):
     """
     Realiza a amostragem por grupos a partir de um DataFrame.
 
@@ -175,25 +173,25 @@ def amostragem_por_grupos(df, num_grupos):
     # Dividir a população em grupos
     grupos = np.array_split(df, num_grupos)
 
-    # Selecionar aleatoriamente os grupos
-    grupos_selecionados = np.random.choice(grupos, size=num_grupos, replace=False)
+    # Selecionar aleatoriamente os índices dos grupos
+    indices_selecionados = np.random.choice(range(len(grupos)), size=num_grupos, replace=False)
 
     # Concatenar os grupos selecionados para formar a amostra
-    amostra = pd.concat(grupos_selecionados)
+    amostra = pd.concat([grupos[i] for i in indices_selecionados])
+
+    amostra = amostra.sample(n_linhas)
 
     return amostra
 
 with col1:
     if st.button("Amostra por Grupos", key='amostra_grupos1'):
-        amostra_grupos = amostragem_por_grupos(arquivo, num_grupos)
+        amostra_grupos = amostragem_por_grupos(arquivo, num_grupos, n_linhas)
         info_placeholder.write(amostra_grupos)
-
 
 with col2:
     if st.button("Salvar na sessão", key='amostra_grupos4'):
         st.session_state['amostra_grupos'] = arquivo.sample(n_linhas)
         st.success("Amostra por grupos salva na sessão com sucesso!")
-
 
 st.markdown(
     "<hr style='border: 1px solid cyan;'>",
