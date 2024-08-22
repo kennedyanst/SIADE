@@ -58,7 +58,7 @@ amostras = {
 }
 
 st.title("INTERVALO DE CONFIANÇA E TESTE DE HIPÓTESE")
-st.subheader("Selecione a amostra no sidebar para visualizar as medidas de posição e dispersão")
+st.subheader("Selecione a base no barra lateral para visualizar as amostras disponíveis para o teste de hipótese e o intervalo de confiança.")
 
 info_placeholder = st.empty()
 
