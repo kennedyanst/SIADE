@@ -44,14 +44,13 @@ st.markdown(
 
 #'''-------------------------------------- AMOSTRAGEM SIMPLES --------------------------------------'''
 st.title("AMOSTRAGEM ALEÁTORIA SIMPLES")
-st.subheader("Na amostragem simples, cada elemento da população tem a mesma probabilidade de ser selecionado. O codigo utilizado para a amostragem simples é basicamente o sample(n), uma função bastante popular no python na criação de amostragem simples.")
+st.header("A amostragem aleatória simples é um método de seleção de uma amostra onde cada elemento da população tem a mesma probabilidade de ser escolhido. É o tipo mais básico de amostragem, onde a seleção é feita aleatoriamente, sem qualquer estrutura pré-determinada.")
 
-st.header('''
-              - Quando deve ser usada: A amostragem aleatória simples é utilizada quando cada elemento da população tem a mesma probabilidade de ser escolhido. É indicada quando não há conhecimento prévio sobre a estrutura da população ou quando se deseja garantir a imparcialidade na seleção.''')
+st.header("No código, a amostragem aleatória simples é realizada utilizando a função sample do pandas, que seleciona aleatoriamente um número especificado de linhas do DataFrame, garantindo que cada linha tenha a mesma probabilidade de ser escolhida.")
 
-st.header("- Tipos de bases de dados: Pode ser aplicada a qualquer tipo de base de dados onde seja possível listar todos os elementos da população e sorteá-los aleatoriamente.")
+st.header("O código segue fielmente a teoria ao garantir que todos os elementos têm a mesma chance de serem incluídos na amostra, o que é um princípio fundamental da amostragem aleatória simples.")
              
-st.header("- Tamanho dos dados: É adequada tanto para populações pequenas quanto para grandes, embora em populações muito grandes possa ser logisticamente desafiador listar todos os elementos")
+st.header("A amostragem aleatória simples é um método eficaz para obter uma amostra representativa da população, desde que a seleção seja feita de forma aleatória e sem viés.")
 
 st.markdown("Selecione o número de linhas que deseja extrair da amostra simples.")
 st.write("Número de linhas no arquivo:", arquivo.shape[0])
@@ -94,7 +93,15 @@ st.markdown(
 
 #'''-------------------------------------- AMOSTRAGEM SISTEMÁTICA --------------------------------------'''
 st.title("AMOSTRAGEM SISTEMÁTICA")
-st.subheader("Na amostragem sistemática, a população é dividida em grupos e, a partir de um ponto de partida aleatório, os elementos são selecionados em intervalos regulares. Nesse código foi utilizado a função np.random.randint(0, intervalo) para selecionar um ponto de partida aleatório e np.random.choice(grupos, size=num_grupos, replace=False) para selecionar os grupos aleatoriamente.")
+
+st.header("Na amostragem sistemática, os elementos são selecionados em intervalos regulares de uma lista ordenada da população, começando a partir de um ponto inicial aleatório. Por exemplo, se você deseja uma amostra de 10% de uma população, pode selecionar cada décimo elemento após um ponto de partida aleatório.")
+
+st.header("A amostragem sistemática é implementada dividindo a população em intervalos iguais e selecionando um ponto de partida aleatório dentro do primeiro intervalo. A partir daí, elementos são selecionados em intervalos regulares usando um loop que percorre o DataFrame com base no intervalo calculado.")
+
+st.header("A abordagem sistemática usada no código reflete a teoria de selecionar elementos em intervalos regulares após a escolha de um ponto de partida aleatório. Isso é útil para evitar vieses, especialmente em populações ordenadas.")
+
+st.header("A mostra sistemática é uma técnica eficaz e que pode ser mais eficiente do que a amostragem aleatória simples, pois garante que a amostra seja representativa da população. Porém, é importante garantir que a população seja aleatória e que não haja padrões nos dados que possam afetar a seleção dos elementos.")
+
 st.markdown("Selecione o número de linhas que deseja extrair da amostra sistemática.")
 st.write("Número de linhas no arquivo:", arquivo.shape[0])
 
@@ -148,16 +155,27 @@ st.markdown(
 #'''-------------------------------------- AMOSTRAGEM POR GRUPOS --------------------------------------'''
 
 st.title("AMOSTRAGEM POR GRUPOS")
-st.subheader("Na amostragem por grupos, a população é dividida em grupos e, a partir de um ponto de partida aleatório, os elementos são selecionados em intervalos regulares. Nesse código foi utilizado a função np.random.choice(grupos, size=num_grupos, replace=False) para selecionar os grupos aleatoriamente.")
+
+st.header("A amostragem por grupos envolve a divisão da população em grupos ou clusters, selecionando aleatoriamente alguns desses grupos, e incluindo todos os elementos dos grupos selecionados na amostra. É útil quando a população está naturalmente dividida em grupos.")
+
+st.header("A função para amostragem por grupos primeiro divide a população em um número especificado de grupos usando np.array_split. Em seguida, grupos inteiros são selecionados aleatoriamente com np.random.choice, e a amostra é composta por todos os elementos desses grupos.")
+
+st.header("O código reflete a teoria ao dividir a população em grupos e ao selecionar alguns desses grupos para formar a amostra. Isso é particularmente relevante quando os grupos naturais são heterogêneos entre si, mas homogêneos internamente.")
+
+st.header("Amostragem em grupos mostra grande eficiência ao reduzir a variabilidade da amostra, especialmente quando os grupos são homogêneos internamente. No entanto, é importante garantir que os grupos sejam representativos da população e que não haja viés na seleção dos grupos.")
+
 st.markdown("Selecione o número de linhas que deseja extrair da amostra por grupos.")
 st.write("Número de linhas no arquivo:", arquivo.shape[0])
 
-n_linhas = st.number_input("Número de linhas", min_value=1, max_value=arquivo.shape[0], value=10, key='n_linhas3')
-num_grupos = st.number_input("Número de grupos", min_value=1, max_value=arquivo.shape[0], value=5, key='num_grupos')
+col1, col2 = st.columns(2)
+
+with col1:
+    n_linhas = st.number_input("Número de linhas", min_value=1, max_value=arquivo.shape[0], value=10, key='n_linhas3')
+
+with col2:
+    num_grupos = st.number_input("Número de grupos", min_value=1, max_value=arquivo.shape[0], value=5, key='num_grupos')
 
 info_placeholder = st.empty()
-
-col1, col2 = st.columns(2)
 
 def amostragem_por_grupos(df, num_grupos, n_linhas):
     """
@@ -202,13 +220,24 @@ st.markdown(
 # '''-------------------------------------- AMOSTRAGEM ESTRATIFICADA --------------------------------------'''
 
 st.title("AMOSTRAGEM ESTRATIFICADA")
+
+st.header("Na amostragem estratificada, a população é dividida em subgrupos ou estratos que compartilham características similares. Amostras são então extraídas de cada estrato proporcionalmente ao seu tamanho na população, garantindo que a amostra represente todas as subpopulações.")
+
+st.header("A amostragem estratificada no código envolve agrupar os dados com base em uma coluna especificada pelo usuário, que representa os estratos. Em seguida, a função groupby do pandas é usada para aplicar a função sample a cada estrato, garantindo que cada estrato seja proporcionalmente representado na amostra.")
+
+st.header("A implementação da amostragem estratificada garante que cada estrato da população seja representado na amostra de acordo com sua proporção no total, o que é essencial para captar a variabilidade dentro de diferentes subgrupos da população.")
+
+st.header("A amostragem estratificada é particularmente útil quando a população é heterogênea e contém subgrupos distintos. Garante que cada subgrupo seja representado na amostra, o que é crucial para obter uma visão abrangente da população.")
+
 st.markdown("Selecione o número de linhas que deseja extrair da amostra estratificada.")
 st.write("Número de linhas no arquivo:", arquivo.shape[0])
 
-n_linhas = st.number_input("Número de linhas", min_value=1, max_value=arquivo.shape[0], value=10, key='n_linhas4')
+col1, col2 = st.columns(2)
+with col1:
+    n_linhas = st.number_input("Número de linhas", min_value=1, max_value=arquivo.shape[0], value=10, key='n_linhas4')
 
-# Seleciona a coluna para estratificação
-coluna_estratificacao = st.selectbox("Selecione a coluna para estratificação", arquivo.columns)
+with col2:
+    coluna_estratificacao = st.selectbox("Selecione a coluna para estratificação", arquivo.columns)
 
 # Função para alternar o estado do botão
 def toggle_button_state(key):
@@ -220,7 +249,6 @@ def toggle_button_state(key):
 info_placeholder = st.empty()
 
 # ORGANIZANDO O LAYOUT DOS BOTÕES E CRIANDO A TELA PARA VISUALIZAÇÃO DOS DADOS QUANDO OS BOTÕES FOREM SELECIONADOS
-col1, col2 = st.columns(2)
 
 def amostra_estratificada(df, coluna_estratificacao, n):
     # Proporção de amostra em relação ao tamanho total do dataset
