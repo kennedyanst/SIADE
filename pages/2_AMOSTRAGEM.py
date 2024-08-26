@@ -22,7 +22,7 @@ else:
 
 # Menu de opções - 2
 st.title("AMOSTRAGEM")
-st.write("Abaixo, você pode selecionar diferentes tipos de amostragem para visualizar e extrair os dados os dados.")
+st.write("Abaixo, você pode selecionar diferentes tipos de amostragem para visualizar e extrair os dados os dados. Atualemnte, as técnicas de amostragem disponíveis são: Amostragem Aleatória Simples, Amostragem Sistemática, Amostragem por Grupos e Amostragem Estratificada, cada uma com suas particularidades e aplicações específicas para diferentes tipos bases.")
 
 
 
