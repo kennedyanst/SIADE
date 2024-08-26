@@ -103,11 +103,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Medidas de Posição e Dispersão de Todas as Células")
 
 # Sidebar para selecionar a coluna numérica
 colunas_numericas = amostra_selecionada.select_dtypes(include=['number']).columns
 amostra_coluna = st.sidebar.selectbox("Selecione a Coluna Numérica", colunas_numericas, index=0)
+
+st.title(f"Medidas de Posição e Dispersão de Todas as Células da {amostra_selecionada_key}, {amostra_coluna}")
 
 # Função para identificar colunas categóricas ou de string
 def colunas_categoricas(df):
