@@ -105,7 +105,7 @@ def intervalo_de_confianca(amostra, alpha):
     return inferior, superior
 
 # Imprimindo o intervalo de confiança
-st.title("Intervalo de Confiança e Teste T de Student")
+st.title("Intervalo de Confiança e Teste T ou Z de Student")
 
 # Colocando o intervalo de confiança no sidebar
 
