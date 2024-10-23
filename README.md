@@ -1,2 +1,2 @@
-# Streamlit-FIFA23
- Projeto com a biblioteca de data app, Streamlit. Aula do canal da ASIMOV ACADEMY.
+# PROJETO DE INICIAÇÃO CIENTÍFICA 
+Autor: Kennedy Anderson Nascimento Santos
