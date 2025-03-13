@@ -47,7 +47,7 @@ st.header("Baseado na atual demanda acadêmica para validação de dados estatí
 
 st.header("Este projeto de iniciação cientifica é um esforço colaborativo entre o Centro Universitário do Distrito Federal (UDF) e a Fundação de Apoio à Pesquisa do Distrito Federal (FAPDF) para auxiliar os estudantes e pesquisadores na análise de dados biomédicos e de outros campos onde se mostrar necessário a aplicação de tecnicas estatísticas.")
 
-st.header("Em primeiro momento, o uuário poderá ter acesso a diferentes tecnicas de amostragem, visualização de dados e estatística descritiva. Posteriormente, o sistema será atualizado com novas funcionalidades, como análise de correlação, regressão, entre outras. Além disso, o sistema também contará com uma interface gráfica para análise genômica mais aprofundado de arquivos FASTA. Atualmente o sistema conta com uma análise de proteina mais superficial, onde o usuário poderá inserir uma sequência de aminoácidos e obter informações sobre a mesma.")
+st.header("Em primeiro momento, o uuário poderá ter acesso a diferentes tecnicas de amostragem, visualização de dados e estatística descritiva. Posteriormente, o sistema será atualizado com novas funcionalidades, como análise de correlação, regressão, entre outras. Além disso, o sistema também contará com uma interface gráfica para análise genômica mais aprofundado de arquivos FASTA. Atualmente o sistema conta com uma análise de proteina mais superficial, onde o usuário poderá inserir uma sequência de aminoácidos e obter informações sobre a mesma..")
 
 st.header("O modelo de tabela deve ser o seguinte:")
 
